@@ -45,11 +45,9 @@ getArticleId = (request, response) => {
 
 const createArticle = (req, res) => {
     const nouveauArticle = {
-        nom_article: req.body.nom_article,
-        prix: req.body.prix,
-        legende: req.body.legende,
-        image: req.body.image,
-        nom_categ: req.body.nom_categ
+        titre: req.body.titre,
+        contenu: req.body.contenu,
+        id_auteur: req.body.id_auteur
     };
 
     ArticleModel.createArticle(nouveauArticle, (error, articleId) => {
@@ -70,11 +68,9 @@ const createArticle = (req, res) => {
 updateArticleId = (req, res) => {
     const articleId = req.params.id;
     const nouveauArticle = {
-        nom: req.body.nom,
-        prix: req.body.prix,
-        legende: req.body.legende,
-        image: req.body.image,
-        id_categ: req.body.id_categ
+        titre: req.body.titre,
+        contenu: req.body.contenu,
+        id_auteur: req.body.id_auteur
     };
 
     ArticleModel.updateArticleId(articleId, nouveauArticle, (error, rowsAffected) => {
@@ -128,5 +124,4 @@ module.exports = {
     createArticle,  // Fonction pour créer un article
     updateArticleId, // Fonction pour mettre à jour un article par son id
     deleteArticleId,  // Fonction pour supprimer un article par son id
-
 }

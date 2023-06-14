@@ -45,29 +45,55 @@ const getAuteurById = (req, res) => {
 // Fonction pour mettre à jour une catégorie
 // ----------------------------------------------
 
-
 const updateAuteur = (req, res) => {
-    const auteurId = req.params.id;
+    const id_auteur = req.params.id;
     const nouveauAuteur = {
-        nom_categ: req.body.nom_categ
+        nom_auteur: req.body.nom_auteur
     };
 
-    auteurModel.updateAuteur(auteurId, nouveauAuteur, (error, rowsAffected) => {
+    auteurModel.updateAuteur(id_auteur, nouveauAuteur, (error, rowsAffected) => {
         if (error) {
+            // En cas d'erreur lors de la récupération des auteurs, renvoyer une réponse d'erreur avec un message approprié
             res.status(500).send({
-                message: error.message || "Une erreur est survenue lors de la mise à jour de l'autheur"
+                message: error.message || "Une erreur est survenue lors de la mise à jour de l'auteur"
             });
         } else {
             if (rowsAffected > 0) {
-                res.send({ id: auteurId, ...nouveauAuteur });
+                // Si la mise à jour est réussie et des lignes ont été affectées, renvoyer les informations mises à jour de l'auteur
+                res.send({ id: id_auteur, ...nouveauAuteur });
             } else {
+                // Si l'auteur n'est pas trouvé, renvoyer une réponse d'erreur avec un message approprié
                 res.status(404).send({
-                    message: "Autheur non trouvé"
+                    message: "Auteur non trouvé"
                 });
             }
         }
     });
 };
+
+//
+// const updateAuteur = (req, res) => {
+//     const auteurId = req.params.id;
+//     const nouveauAuteur = {
+//         nom_auteur: req.body.nom_auteur
+//     };
+//
+//     auteurModel.updateAuteur(auteurId, nouveauAuteur, (error, rowsAffected) => {
+//         if (error) {
+//             res.status(500).send({
+//                 message: error.message || "Une erreur est survenue lors de la mise à jour de l'autheur"
+//             });
+//         } else {
+//             if (rowsAffected > 0) {
+//                 res.send({ id: auteurId, ...nouveauAuteur });
+//             } else {
+//                 res.status(404).send({
+//                     message: "Autheur non trouvé"
+//                 });
+//             }
+//         }
+//     });
+// };
 // ----------------------------------------------
 // Fonction pour créer une nouvelle catégorie
 // ----------------------------------------------
@@ -75,12 +101,12 @@ const updateAuteur = (req, res) => {
 
 const createAuteur = (req, res) => {
     const nouveauAuteur = {
-        nom_categ: req.body.nom_categ
+        nom_auteur: req.body.nom_auteur
     };
     auteurModel.createAuteur(nouveauAuteur, (error, auteurId) => {
         if (error) {
             res.status(500).send({
-                message: error.message || "Une erreur est survenue lors de la création de l'autheur"
+                message: error.message || "Une erreur est survenue lors de la création de l'auteur"
             });
         } else {
             res.send({ id: auteurId, ...nouveauAuteur });
@@ -97,14 +123,14 @@ const deleteAuteur = (req, res) => {
     auteurModel.deleteAuteur(auteurId, (error, rowsAffected) => {
         if (error) {
             res.status(500).send({
-                message: error.message || "Une erreur est survenue lors de la suppression de l'autheur"
+                message: error.message || "Une erreur est survenue lors de la suppression de l'auteur"
             });
         } else {
             if (rowsAffected > 0) {
-                res.send({ message: "Autheur supprimé avec succès" });
+                res.send({ message: "Auteur supprimé avec succès" });
             } else {
                 res.status(404).send({
-                    message: "Autheur non trouvé"
+                    message: "Auteur non trouvé"
                 });
             }
         }
@@ -117,7 +143,7 @@ const deleteAuteur = (req, res) => {
 module.exports = {
     getAllAuteurs,  // Fonction pour obtenir tous les auteurs
     getAuteurById, // Fonction pour obtenir un auteur par son identifiant
-    updateAuteur, // Fonction pour créer un auteurs
-    createAuteur, // Fonction pour mettre à jour un categoris par son identifiant
+    updateAuteur, // Fonction pour créer un auteur
+    createAuteur, // Fonction pour mettre à jour un auteur par son identifiant
     deleteAuteur // Fonction pour supprimer un auteur par son id
 };

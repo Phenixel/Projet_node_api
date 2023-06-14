@@ -47,12 +47,12 @@ server.get('/', (req, res) => {
 // ----------------------------------------------
 // Configuration des routes supplémentaires pour les articles et les catégories
 // ----------------------------------------------
-server.use('/api/v1/articles/', articleRoute);
-server.use('/api/v1/auteurs/', auteurRoute);
-server.use('/api/v1/articles/', articleRoute);
-server.use('/api/v1/auteurs/', auteurRoute);
-server.use('/api/v1/articles/', articleRoute);
-server.use('/api/v1/auteurs/', auteurRoute);
+server.use('/api/v1/articles/', articleRoute); // Doublon de la route
+server.use('/api/v1/auteurs/', auteurRoute); // Doublon de la route
+server.use('/api/v1/articles/', articleRoute); // Doublon de la route
+server.use('/api/v1/auteurs/', auteurRoute); // Doublon de la route
+server.use('/api/v1/articles/', articleRoute); // Doublon de la route
+server.use('/api/v1/auteurs/', auteurRoute); // Doublon de la route
 server.use('/api/v1/articles', articleRoute);
 server.use('/api/v1/auteurs', auteurRoute);
 

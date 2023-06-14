@@ -10,7 +10,6 @@ const ArticleConstructor = function (article) {
     this.id_article = article.id_article;
     this.titre = article.titre;
     this.contenu = article.contenu;
-    this.date_publication = article.date_publication;
     this.id_auteur = article.id_auteur;
 };
 
@@ -52,9 +51,9 @@ const getArticleId = (ID, result_bdd_request) => {
 // Créer un nouvel article en base de données
 // ----------------------------------------------
 const createArticle = (nouveauArticle, result_bdd_request) => {
-    const { titre, contenu, date_publication, id_auteur } = nouveauArticle;
-    const query = "INSERT INTO articles (titre, contenu, date_publication, id_auteur) VALUES (?, ?, ?, ?)";
-    const values = [titre, contenu, date_publication, id_auteur];
+    const { titre, contenu, id_auteur } = nouveauArticle;
+    const query = "INSERT INTO articles (titre, contenu, id_auteur) VALUES (?, ?, ?)";
+    const values = [titre, contenu, id_auteur];
     dataBase.query(query, values, (error, response) => {
         if (error) {
             result_bdd_request(error);
@@ -68,7 +67,8 @@ const createArticle = (nouveauArticle, result_bdd_request) => {
 // Mettre à jour un article par son ID
 // ----------------------------------------------
 const updateArticleId = (articleId, updatedData, result_bdd_request) => {
-    const query = "UPDATE articles SET ? WHERE id_article = ?";
+    const query = `UPDATE articles SET ? WHERE id_article = ?`;
+
     dataBase.query(query, [updatedData, articleId], (error, response) => {
         if (error) {
             result_bdd_request(error);

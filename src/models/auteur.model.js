@@ -39,16 +39,26 @@ const getAuteurById = (id, result_bdd_request) => {
 // ----------------------------------------------
 // Mise à jour d'un auteur
 // ----------------------------------------------
-const updateAuteur = (id, auteur, result_bdd_request) => {
+// const updateAuteur = (id, auteur, result_bdd_request) => {
+//     const { nom_auteur } = auteur;
+//     const query = "UPDATE auteurs SET nom_auteur = ? WHERE id_auteur = ?";
+//     dataBase.query(query, [nom_auteur, id], (error, response) => {
+//         if (error) {
+//             result_bdd_request(error);
+//         } else {
+//             result_bdd_request(null, response.affectedRows);
+//         }
+//     });
+// };
+
+updateAuteur = (id, auteur, result_bdd_request) => {
     const { nom_auteur } = auteur;
     const query = "UPDATE auteurs SET nom_auteur = ? WHERE id_auteur = ?";
     dataBase.query(query, [nom_auteur, id], (error, response) => {
         if (error) {
-            result_bdd_request(error);
-        } else if (response.affectedRows === 0) {
-            result_bdd_request({ kind: "id_not_found" });
+            result_bdd_request(error);// Renvoyer une erreur en cas d'erreur lors de la requête
         } else {
-            result_bdd_request(null, response.affectedRows);
+            result_bdd_request(null, response.affectedRows);// Renvoyer le résultat de la requête
         }
     });
 };

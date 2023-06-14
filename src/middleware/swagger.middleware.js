@@ -34,10 +34,6 @@ const options = {
                         contenu: {
                             type: "string",
                         },
-                        date_publication: {
-                            type: "string",
-                            format: "date-time",
-                        },
                         id_auteur: {
                             type: "integer",
                         },
@@ -52,15 +48,11 @@ const options = {
                         contenu: {
                             type: "string",
                         },
-                        date_publication: {
-                            type: "string",
-                            format: "date-time",
-                        },
                         id_auteur: {
                             type: "integer",
                         },
                     },
-                    required: ["titre", "contenu", "date_publication", "id_auteur"],
+                    required: ["titre", "contenu", "id_auteur"],
                 },
                 Auteur: {
                     type: "object",
